@@ -1,0 +1,60 @@
+@mixin prefixify($name, $value, $side) {
+    @each $vendor in ('-webkit-', '-khtml-', '-moz-', '-ms-', '-o-', '') {
+        @if(($side == both) or ($side == keyval) or ($side == key-val)) {
+            #{$vendor}#{$name}: #{$vendor}#{$value};
+        }
+        @else if(($side == right) or ($side == val)) {
+            #{$name}: #{$vendor}#{$value};
+        }
+        @else {
+            #{$vendor}#{$name}: #{$value};
+        }
+    }
+}
+
+.image_container {
+    width: 60%;
+    float: left;
+    position: absolute;
+    left: 20%;
+    padding-bottom: 40%;
+    z-index: 0;
+
+    img {
+        border:3px solid white;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+
+        -webkit-transition-property: -webkit-transform, filter;
+        -moz-transition-property: -moz-transform, filter;
+        -ms-transition-property: -ms-transform, filter;
+        transition-property: transform, filter;
+        
+        &.animatingOut {
+            //@include prefixify(opacity, 0.9, left);
+            @include prefixify(filter, 'blur(1px)', left);
+        }
+    }
+
+    .imageposition1 {
+        left: -5px;
+    }
+
+    .imageposition2 {
+        left: 15px;
+    }
+
+    .imageposition3 {
+        left: -15px;
+    }
+
+    .imageposition4 {
+        left: 5px;
+    }
+}
